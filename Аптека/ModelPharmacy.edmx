@@ -1,0 +1,216 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище PharmacyModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AvailabilitySet">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdPharmacy" Type="int" Nullable="false" />
+          <Property Name="IdMedicine" Type="int" Nullable="false" />
+          <Property Name="Amount" Type="int" Nullable="false" />
+          <Property Name="Price" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MedicineSet">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ReleaseForm" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Dosage" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Manufacturer" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ShelfLife" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="PharmacySet">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Phone" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="OpenHourse" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_AvailabilitySet_AvailabilitySet1">
+          <End Role="MedicineSet" Type="Self.MedicineSet" Multiplicity="1" />
+          <End Role="AvailabilitySet" Type="Self.AvailabilitySet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MedicineSet">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AvailabilitySet">
+              <PropertyRef Name="IdMedicine" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AvailabilitySet_PharmacySet">
+          <End Role="PharmacySet" Type="Self.PharmacySet" Multiplicity="1" />
+          <End Role="AvailabilitySet" Type="Self.AvailabilitySet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PharmacySet">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AvailabilitySet">
+              <PropertyRef Name="IdPharmacy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище PharmacyModelContainer">
+          <EntitySet Name="AvailabilitySet" EntityType="Self.AvailabilitySet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MedicineSet" EntityType="Self.MedicineSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PharmacySet" EntityType="Self.PharmacySet" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_AvailabilitySet_AvailabilitySet1" Association="Self.FK_AvailabilitySet_AvailabilitySet1">
+            <End Role="MedicineSet" EntitySet="MedicineSet" />
+            <End Role="AvailabilitySet" EntitySet="AvailabilitySet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AvailabilitySet_PharmacySet" Association="Self.FK_AvailabilitySet_PharmacySet">
+            <End Role="PharmacySet" EntitySet="PharmacySet" />
+            <End Role="AvailabilitySet" EntitySet="AvailabilitySet" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PharmacyModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AvailabilitySet">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdPharmacy" Type="Int32" Nullable="false" />
+          <Property Name="IdMedicine" Type="Int32" Nullable="false" />
+          <Property Name="Amount" Type="Int32" Nullable="false" />
+          <Property Name="Price" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="MedicineSet" Relationship="Self.FK_AvailabilitySet_AvailabilitySet1" FromRole="AvailabilitySet" ToRole="MedicineSet" />
+          <NavigationProperty Name="PharmacySet" Relationship="Self.FK_AvailabilitySet_PharmacySet" FromRole="AvailabilitySet" ToRole="PharmacySet" />
+        </EntityType>
+        <EntityType Name="MedicineSet">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ReleaseForm" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Dosage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Manufacturer" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ShelfLife" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AvailabilitySet" Relationship="Self.FK_AvailabilitySet_AvailabilitySet1" FromRole="MedicineSet" ToRole="AvailabilitySet" />
+        </EntityType>
+        <EntityType Name="PharmacySet">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="OpenHourse" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AvailabilitySet" Relationship="Self.FK_AvailabilitySet_PharmacySet" FromRole="PharmacySet" ToRole="AvailabilitySet" />
+        </EntityType>
+        <Association Name="FK_AvailabilitySet_AvailabilitySet1">
+          <End Role="MedicineSet" Type="Self.MedicineSet" Multiplicity="1" />
+          <End Role="AvailabilitySet" Type="Self.AvailabilitySet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MedicineSet">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AvailabilitySet">
+              <PropertyRef Name="IdMedicine" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AvailabilitySet_PharmacySet">
+          <End Role="PharmacySet" Type="Self.PharmacySet" Multiplicity="1" />
+          <End Role="AvailabilitySet" Type="Self.AvailabilitySet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PharmacySet">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AvailabilitySet">
+              <PropertyRef Name="IdPharmacy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PharmacyEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AvailabilitySet" EntityType="Self.AvailabilitySet" />
+          <EntitySet Name="MedicineSet" EntityType="Self.MedicineSet" />
+          <EntitySet Name="PharmacySet" EntityType="Self.PharmacySet" />
+          <AssociationSet Name="FK_AvailabilitySet_AvailabilitySet1" Association="Self.FK_AvailabilitySet_AvailabilitySet1">
+            <End Role="MedicineSet" EntitySet="MedicineSet" />
+            <End Role="AvailabilitySet" EntitySet="AvailabilitySet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AvailabilitySet_PharmacySet" Association="Self.FK_AvailabilitySet_PharmacySet">
+            <End Role="PharmacySet" EntitySet="PharmacySet" />
+            <End Role="AvailabilitySet" EntitySet="AvailabilitySet" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище PharmacyModelContainer" CdmEntityContainer="PharmacyEntities">
+          <EntitySetMapping Name="AvailabilitySet">
+            <EntityTypeMapping TypeName="PharmacyModel.AvailabilitySet">
+              <MappingFragment StoreEntitySet="AvailabilitySet">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IdPharmacy" ColumnName="IdPharmacy" />
+                <ScalarProperty Name="IdMedicine" ColumnName="IdMedicine" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MedicineSet">
+            <EntityTypeMapping TypeName="PharmacyModel.MedicineSet">
+              <MappingFragment StoreEntitySet="MedicineSet">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ReleaseForm" ColumnName="ReleaseForm" />
+                <ScalarProperty Name="Dosage" ColumnName="Dosage" />
+                <ScalarProperty Name="Manufacturer" ColumnName="Manufacturer" />
+                <ScalarProperty Name="ShelfLife" ColumnName="ShelfLife" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PharmacySet">
+            <EntityTypeMapping TypeName="PharmacyModel.PharmacySet">
+              <MappingFragment StoreEntitySet="PharmacySet">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="OpenHourse" ColumnName="OpenHourse" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
