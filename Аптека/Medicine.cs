@@ -16,6 +16,7 @@ namespace Аптека
         {
             InitializeComponent();
             ShowMedicine();
+            
         }
 
         void ShowMedicine()
@@ -36,7 +37,7 @@ namespace Аптека
             }
            listViewMedicine.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
         }
-
+        
         private void Medicine_Load(object sender, EventArgs e)
         {
 
@@ -46,6 +47,7 @@ namespace Аптека
         {
             if (listViewMedicine.SelectedItems.Count == 1)
             {
+                
                 MedicineSet medicine = listViewMedicine.SelectedItems[0].Tag as MedicineSet;
                 
                 textBoxName.Text = medicine.Name;

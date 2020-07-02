@@ -24,7 +24,7 @@
           <Property Name="ReleaseForm" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Dosage" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Manufacturer" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="ShelfLife" Type="nvarchar(max)" />
+          <Property Name="ShelfLife" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="PharmacySet">
           <Key>
@@ -99,7 +99,7 @@
           <Property Name="ReleaseForm" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Dosage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Manufacturer" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ShelfLife" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ShelfLife" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="AvailabilitySet" Relationship="Self.FK_AvailabilitySet_AvailabilitySet1" FromRole="MedicineSet" ToRole="AvailabilitySet" />
         </EntityType>
         <EntityType Name="PharmacySet">

@@ -144,11 +144,16 @@ namespace Аптека
 
         private void textBoxPrice_KeyPress(object sender, KeyPressEventArgs e)
         {
-            char number = e.KeyChar;
-            if ((e.KeyChar <= 47 || e.KeyChar >= 58) && number != 8)
-            {
-                e.Handled = true;
-            }
+                char number = e.KeyChar;
+                if ((e.KeyChar <= 47 || e.KeyChar >= 58) && number != 8)
+                {
+                    e.Handled = true;
+                }
+        }
+
+        private void textBoxAmount_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
